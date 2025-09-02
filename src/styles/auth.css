@@ -1,0 +1,94 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: black;
+}
+
+.auth-bg {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #232526 0%, #414345 100%);
+}
+/* Styles de base pour les pages de connexion et inscription */
+.login-container,
+.register-container {
+  max-width: 350px;
+  width: 100%;
+  padding: 2em 2em 1.5em 2em;
+  background: #f8f9fa;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-container h2,
+.register-container h2 {
+  margin-bottom: 1em;
+  color: #646cff;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.login-container form div,
+.register-container form div {
+  margin-bottom: 1em;
+  text-align: left;
+}
+.login-container label,
+.register-container label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: 500;
+  color: #333;
+}
+.login-container input,
+.register-container input {
+  width: 100%;
+  padding: 0.6em;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 1em;
+  margin-bottom: 0.2em;
+}
+.login-container button,
+.register-container button {
+  width: 100%;
+  padding: 0.8em;
+  background: linear-gradient(90deg, #646cff 0%, #535bf2 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+  transition: background 0.2s;
+}
+.login-container button:hover,
+.register-container button:hover {
+  background: linear-gradient(90deg, #535bf2 0%, #646cff 100%);
+}
+.login-container p,
+.register-container p {
+  margin-top: 1em;
+  text-align: center;
+  font-size: 0.95em;
+}
+.login-container a,
+.register-container a {
+  color: #646cff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.login-container a:hover,
+.register-container a:hover {
+  color: #535bf2;
+  text-decoration: underline;
+}
