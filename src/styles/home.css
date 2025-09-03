@@ -1,0 +1,106 @@
+/* Layout principal de la page d'accueil */
+.home-main-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 48px;
+  margin-top: 120px;
+  margin-bottom: 32px;
+}
+
+.home-stats,
+.home-score {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.1);
+  padding: 1.5em 2em;
+  min-width: 180px;
+  text-align: left;
+}
+.home-stats h2,
+.home-score h2 {
+  color: #646cff;
+  font-size: 1.3em;
+  margin-bottom: 0.7em;
+}
+.home-stats ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.home-stats li {
+  margin-bottom: 0.5em;
+  font-size: 1em;
+}
+.home-arena {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.arena-btn {
+  padding: 1em 2.5em;
+  font-size: 1.2em;
+  background: linear-gradient(90deg, #646cff 0%, #535bf2 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.arena-btn:hover {
+  background: linear-gradient(90deg, #535bf2 0%, #646cff 100%);
+}
+.home-bg {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #232526 0%, #414345 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-menu {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.1);
+  padding: 1em 2em;
+  margin-top: 16px;
+}
+.home-menu ul {
+  list-style: none;
+  display: flex;
+  gap: 2em;
+  margin: 0;
+  padding: 0;
+}
+.home-menu li {
+  font-size: 1.1em;
+}
+.home-content {
+  margin-top: 60px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 2em 3em;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.1);
+  text-align: center;
+}
+.home-content h1 {
+  color: #646cff;
+  font-size: 2.2em;
+  margin-bottom: 0.5em;
+}
+.home-content {
+  margin-top: 120px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 2em 3em;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.1);
+  text-align: center;
+}
