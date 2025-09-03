@@ -10,11 +10,11 @@ export default function Login() {
         <form>
           <div>
             <label>Nom d'utilisateur</label>
-            <input type="text" placeholder="Votre nom" />
+            <input type="text" placeholder="Votre nom" name="username"/>
           </div>
           <div>
             <label>Mot de passe</label>
-            <input type="password" placeholder="Votre mot de passe" />
+            <input type="password" placeholder="Votre mot de passe" name="password"/>
           </div>
           <button type="submit">Se connecter</button>
         </form>

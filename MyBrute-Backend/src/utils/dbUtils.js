@@ -1,20 +1,13 @@
--- Création de la base de données
-CREATE DATABASE IF NOT EXISTS mybrutes;
+import { pool } from "../config/db.js";
 
--- Sélection de la base de données
-USE mybrutes;
-
--- Table des utilisateurs
-CREATE TABLE users (
+const userTableQuery = `CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+);`;
 
--- Table des brutes
-CREATE TABLE brutes (
+const bruteTableQuery = `CREATE TABLE brutes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     name VARCHAR(50) NOT NULL,
@@ -28,17 +21,15 @@ CREATE TABLE brutes (
     CONSTRAINT fk_user
         FOREIGN KEY(user_id) REFERENCES users(id)
         ON DELETE CASCADE
-);
+);`;
 
--- Table des compétences
-CREATE TABLE skills (
+const skillTableQuery = `CREATE TABLE skills (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     description TEXT
-);
+);`;
 
--- Table pivot brutes <-> compétences
-CREATE TABLE brute_skills (
+const bruteSkillTableQuery = `CREATE TABLE brute_skills (
     id INT AUTO_INCREMENT PRIMARY KEY,
     brute_id INT NOT NULL,
     skill_id INT NOT NULL,
@@ -50,19 +41,17 @@ CREATE TABLE brute_skills (
         FOREIGN KEY(skill_id) REFERENCES skills(id)
         ON DELETE CASCADE,
     UNIQUE(brute_id, skill_id)
-);
+);`;
 
--- Table des armes
-CREATE TABLE weapons (
+const weaponTableQuery = `CREATE TABLE weapons (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     damage_min INT NOT NULL,
     damage_max INT NOT NULL,
     special_effect VARCHAR(100)
-);
+);`;
 
--- Table pivot brutes <-> armes
-CREATE TABLE brute_weapons (
+const bruteWeaponTableQuery = `CREATE TABLE brute_weapons (
     id INT AUTO_INCREMENT PRIMARY KEY,
     brute_id INT NOT NULL,
     weapon_id INT NOT NULL,
@@ -74,10 +63,9 @@ CREATE TABLE brute_weapons (
         FOREIGN KEY(weapon_id) REFERENCES weapons(id)
         ON DELETE CASCADE,
     UNIQUE(brute_id, weapon_id)
-);
+);`;
 
--- Table des combats entre brutes
-CREATE TABLE battles (
+const battleTableQuery = `CREATE TABLE battles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     attacker_id INT NOT NULL,
     defender_id INT NOT NULL,
@@ -87,4 +75,31 @@ CREATE TABLE battles (
     CONSTRAINT fk_attacker FOREIGN KEY(attacker_id) REFERENCES brutes(id),
     CONSTRAINT fk_defender FOREIGN KEY(defender_id) REFERENCES brutes(id),
     CONSTRAINT fk_winner FOREIGN KEY(winner_id) REFERENCES brutes(id)
-);
+);`;
+
+const createTable = async (tableName, query) => {
+    try{
+        await pool.query(query);
+        console.log(`${tableName} table created or already exists`);
+    } catch (error) {
+        console.log(`Error creating ${tableName}`, error);
+    }
+};
+
+const createAllTable = async () => {
+    try {
+        await createTable("users", userTableQuery);
+        await createTable("brutes", bruteTableQuery);
+        await createTable("skills", skillTableQuery);
+        await createTable("brute_skills", bruteSkillTableQuery);
+        await createTable("weapons", weaponTableQuery);
+        await createTable("brute_weapons", bruteWeaponTableQuery);
+        await createTable("battles", battleTableQuery);
+        console.log("All tables created successfully");
+    } catch (error) {
+        console.log("Error creating tables", error);
+        throw error;
+    }
+}
+
+export default createAllTable;
