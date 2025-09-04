@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/auth.css";
 import axios from 'axios';
+import { toast } from "react-toastify";
 
 export default function Register() {
 
@@ -18,8 +19,21 @@ export default function Register() {
   const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(formValues);
-    const response = await axios.post("http://localhost:3000/api/auth/register", formValues);
-    console.log(response);
+
+    try{
+      const response = await axios.post("http://localhost:3000/api/auth/register", formValues);
+      console.log(response, 'res');
+
+      if (response.data.success){
+        toast.success(response.data.message || "Registration successful !");
+        setFormValues({username: "", password: ""});
+      } else {
+        toast.error(response.data.message || "Registration failed ! Please retry.");
+      }
+    } catch (error) {
+      console.error("Error during registration :", error);
+      toast.error(error.response.data.message || "Something went wrong, please try again later.");
+    }
   }
 
   return (

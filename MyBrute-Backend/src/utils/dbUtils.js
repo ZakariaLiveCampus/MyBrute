@@ -48,7 +48,8 @@ const weaponTableQuery = `CREATE TABLE weapons (
     name VARCHAR(50) NOT NULL,
     damage_min INT NOT NULL,
     damage_max INT NOT NULL,
-    special_effect VARCHAR(100)
+    special_effect VARCHAR(100),
+    level INT NOT NULL
 );`;
 
 const bruteWeaponTableQuery = `CREATE TABLE brute_weapons (

@@ -37,3 +37,6 @@ battles table created or already exists
 All tables created successfully
 
 COMMANDE A REALISER EGALEMENT => npm install axios --save
+
+npm i jsonwebtoken
+npm install react-toastify

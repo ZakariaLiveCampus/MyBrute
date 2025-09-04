@@ -11,6 +11,8 @@ import Home from "./pages/Home";
 import Arena from "./pages/Arena";
 import CreateBrute from "./pages/CreateBrute";
 import Fight from "./pages/Fight";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -24,6 +26,13 @@ function App() {
         <Route path="/arena" element={<Arena />} />;
         <Route path="/fight" element={<Fight />} />;
       </Routes>
+      <ToastContainer 
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={true}
+        closeOnClick
+        theme="colored"
+      />
     </Router>
   );
 }
