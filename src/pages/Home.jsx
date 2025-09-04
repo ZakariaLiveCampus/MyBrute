@@ -17,10 +17,11 @@ export default function Home() {
         <div className="home-stats">
           <h2>Ma Brute</h2>
           <ul>
-            <li>Force : 12</li>
-            <li>Agilité : 8</li>
-            <li>Vitesse : 10</li>
-            <li>Niveau : 3</li>
+            <li>Vie : 32</li>
+            <li>Force : 15</li>
+            <li>Agilité : 9</li>
+            <li>Vitesse : 11</li>
+            <li>Niveau : 4</li>
           </ul>
         </div>
         <div className="home-arena">

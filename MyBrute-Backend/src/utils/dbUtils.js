@@ -48,7 +48,8 @@ const weaponTableQuery = `CREATE TABLE weapons (
     name VARCHAR(50) NOT NULL,
     damage_min INT NOT NULL,
     damage_max INT NOT NULL,
-    special_effect VARCHAR(100)
+    special_effect VARCHAR(100),
+    level INT NOT NULL
 );`;
 
 const bruteWeaponTableQuery = `CREATE TABLE brute_weapons (
@@ -78,28 +79,28 @@ const battleTableQuery = `CREATE TABLE battles (
 );`;
 
 const createTable = async (tableName, query) => {
-    try{
-        await pool.query(query);
-        console.log(`${tableName} table created or already exists`);
-    } catch (error) {
-        console.log(`Error creating ${tableName}`, error);
-    }
+  try {
+    await pool.query(query);
+    console.log(`${tableName} table created or already exists`);
+  } catch (error) {
+    console.log(`Error creating ${tableName}`, error);
+  }
 };
 
 const createAllTable = async () => {
-    try {
-        await createTable("users", userTableQuery);
-        await createTable("brutes", bruteTableQuery);
-        await createTable("skills", skillTableQuery);
-        await createTable("brute_skills", bruteSkillTableQuery);
-        await createTable("weapons", weaponTableQuery);
-        await createTable("brute_weapons", bruteWeaponTableQuery);
-        await createTable("battles", battleTableQuery);
-        console.log("All tables created successfully");
-    } catch (error) {
-        console.log("Error creating tables", error);
-        throw error;
-    }
-}
+  try {
+    await createTable("users", userTableQuery);
+    await createTable("brutes", bruteTableQuery);
+    await createTable("skills", skillTableQuery);
+    await createTable("brute_skills", bruteSkillTableQuery);
+    await createTable("weapons", weaponTableQuery);
+    await createTable("brute_weapons", bruteWeaponTableQuery);
+    await createTable("battles", battleTableQuery);
+    console.log("All tables created successfully");
+  } catch (error) {
+    console.log("Error creating tables", error);
+    throw error;
+  }
+};
 
 export default createAllTable;
