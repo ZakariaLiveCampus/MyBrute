@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "../styles/theme.css";
 import "../styles/auth.css";
 import axios from 'axios';
 import { toast } from "react-toastify";

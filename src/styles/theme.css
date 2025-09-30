@@ -1,0 +1,102 @@
+/* theme.css - Variables et styles globaux */
+
+:root {
+  /* Couleurs principales */
+  --primary-dark: #3d2817;
+  --primary-medium: #5c3d2e;
+  --primary-light: #8b6f47;
+  
+  /* Couleurs secondaires - verts */
+  --secondary-dark: #2d4a2b;
+  --secondary-medium: #4a7c59;
+  --secondary-light: #6b9b7a;
+  
+  /* Couleurs d'accent */
+  --accent-gold: #d4af37;
+  --accent-bronze: #cd7f32;
+  --accent-red: #8b2e2e;
+  
+  /* Neutres */
+  --bg-primary: #f5f1e8;
+  --bg-secondary: #e8dcc4;
+  --bg-dark: #2a1f14;
+  --text-primary: #2a1f14;
+  --text-secondary: #5c4a3a;
+  --text-light: #f5f1e8;
+  
+  /* UI Elements */
+  --border-color: #3d2817;
+  --shadow: rgba(61, 40, 23, 0.3);
+  --shadow-heavy: rgba(61, 40, 23, 0.5);
+  
+  /* Animations */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  overflow-x: hidden;
+}
+
+/* Typographie */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+/* Boutons génériques */
+button, .btn {
+  font-family: inherit;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  outline: none;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Inputs génériques */
+input, textarea, select {
+  font-family: inherit;
+  outline: none;
+  transition: all var(--transition-normal);
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition-fast);
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-medium);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
