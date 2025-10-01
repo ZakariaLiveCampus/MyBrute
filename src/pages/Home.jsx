@@ -7,9 +7,12 @@ import axios from "axios";
 export default function Home() {
 
   const [userData, setUserData] = useState("");
+  const [brutes, setBrutes] = useState([]);
+  const [stats, setStats] = useState({ victories: 0, defeats: 0 });
 
-  useEffect(()=> {
+  useEffect(() => {
     fetchUserDetails();
+    fetchUserBrutes();
   }, []);
 
   const fetchUserDetails = async () => {
@@ -39,6 +42,46 @@ export default function Home() {
     }
   };
 
+  
+  const fetchUserBrutes = async () => {
+    try {
+      const token = sessionStorage.getItem("authToken");
+
+      const response = await axios.get("http://localhost:3000/api/brutes/my-brutes", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (response.data.success && response.data.brutes.length > 0) {
+        setBrutes(response.data.brutes);
+        fetchBruteStats(response.data.brutes[0].id);
+      } else {
+        console.log(response.data.message || "Failed to fetch brutes");
+      }
+    } catch (err) {
+      console.error("Error fetching brutes : ", err);
+    }
+  };
+
+
+  const fetchBruteStats = async (bruteId) => {
+    try {
+      const token = sessionStorage.getItem("authToken");
+
+      const response = await axios.get(`http://localhost:3000/api/brutes/${bruteId}/stats`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (response.data.success) {
+        setStats(response.data.stats);
+      } else {
+        console.log(response.data.message || "Failed to fetch stats");
+      }
+    } catch (err) {
+      console.error("Error fetching stats : ", err);
+    }
+  };
+
+
   return (
     <div className="home-bg">
       <Menu />
@@ -51,12 +94,19 @@ export default function Home() {
       <div className="home-main-layout">
         <div className="home-stats">
           <h2>Ma Brute</h2>
-          <ul>
-            <li>Force : 12</li>
-            <li>Agilité : 8</li>
-            <li>Vitesse : 10</li>
-            <li>Niveau : 3</li>
-          </ul>
+          {brutes.length > 0 ? (
+            <ul>
+              <li>Nom : {brutes[0].name}</li>
+              <li>Force : {brutes[0].strength}</li>
+              <li>Agilité : {brutes[0].agility}</li>
+              <li>Vitesse : {brutes[0].speed}</li>
+              <li>Niveau : {brutes[0].level}</li>
+              <li>XP : {brutes[0].xp}</li>
+              <li>HP : {brutes[0].hp}</li>
+            </ul>
+          ) : (
+            <p>Aucune brute créée pour l’instant.</p>
+          )}
         </div>
         <div className="home-arena">
           <Link to="/arena">
@@ -65,8 +115,8 @@ export default function Home() {
         </div>
         <div className="home-score">
           <h2>Scores</h2>
-          <p>Victoires : 5</p>
-          <p>Défaites : 2</p>
+          <p>Victoires : {stats.victories}</p>
+          <p>Défaites : {stats.defeats}</p>
         </div>
       </div>
     </div>

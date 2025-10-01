@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import { pool } from '../config/db.js';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET ="udstyguyds98d98798iudsgjdskkdjhds8698"; 
+const JWT_SECRET = process.env.JWT_SECRET; 
 
 export const registerUser = async(user) => {
     console.log(user);

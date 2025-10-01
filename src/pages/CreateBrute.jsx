@@ -1,13 +1,33 @@
 import React, { useState } from "react";
 import "../styles/auth.css";
+import { Link, useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function CreateBrute() {
   const [name, setName] = useState("");
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Pour l'instant, juste une alerte
-    alert(`Brute créée : ${name}`);
+
+    try {
+      const token = sessionStorage.getItem("authToken");
+      const response = await axios.post(
+        "http://localhost:3000/api/brutes/create",
+        { name },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (response.data.success) {
+        toast.success("Brute créée avec succès !");
+        console.log("Nouvelle brute :", response.data.brute);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Erreur lors de la création de la brute");
+    }
   };
 
   return (
@@ -26,7 +46,7 @@ export default function CreateBrute() {
               required
             />
           </div>
-          <button type="submit">Continuer</button>
+          <button type="submit"><Link to="/home">Continuer</Link></button>
         </form>
       </div>
     </div>

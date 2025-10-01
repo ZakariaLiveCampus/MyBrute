@@ -53,7 +53,7 @@ export default function Register() {
             <label>Confirmer le mot de passe</label>
             <input type="password" placeholder="Confirmez le mot de passe" name="password" value={formValues.password} onChange={handleInputChange}/>
           </div>
-          <button type="submit">S'inscrire</button>
+          <button type="submit" ><Link to="/login">S'inscrire</Link></button>
         </form>
         <p>
           Déjà un compte ? <Link to="/login">Connexion</Link>
