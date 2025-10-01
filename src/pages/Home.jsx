@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "../styles/home.css";
-import Menu from "../components/Menu";
+import Navigation from "../components/layout/Navigation/Navigation";
 import { Link } from "react-router-dom";
+import { Button } from "../components/ui";
+import { useGame } from "../contexts/GameContext";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Home() {
-
+  const navigate = useNavigate();
+  const { brute } = useGame();
   const [userData, setUserData] = useState("");
   const [brutes, setBrutes] = useState([]);
   const [stats, setStats] = useState({ victories: 0, defeats: 0 });
+
+  const handleGoToArena = () => {
+    navigate("/arena");
+  };
 
   useEffect(() => {
     fetchUserDetails();
@@ -19,20 +27,23 @@ export default function Home() {
     try {
       const token = sessionStorage.getItem("authToken");
 
-      const response = await axios.get("http://localhost:3000/api/auth/getUserData", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        "http://localhost:3000/api/auth/getUserData",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.data.success) {
         console.log(response.data);
         setUserData(response.data.data);
         let userInfo = {
           isLoggedIn: true,
-          userData: response.data
-        }
-        sessionStorage.setItem('userData', JSON.stringify(userInfo));
+          userData: response.data,
+        };
+        sessionStorage.setItem("userData", JSON.stringify(userInfo));
       } else {
         console.log(response.data.message || "Failed to fetch user details");
       }
@@ -42,14 +53,16 @@ export default function Home() {
     }
   };
 
-  
   const fetchUserBrutes = async () => {
     try {
       const token = sessionStorage.getItem("authToken");
 
-      const response = await axios.get("http://localhost:3000/api/brutes/my-brutes", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        "http://localhost:3000/api/brutes/my-brutes",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       if (response.data.success && response.data.brutes.length > 0) {
         setBrutes(response.data.brutes);
@@ -62,14 +75,16 @@ export default function Home() {
     }
   };
 
-
   const fetchBruteStats = async (bruteId) => {
     try {
       const token = sessionStorage.getItem("authToken");
 
-      const response = await axios.get(`http://localhost:3000/api/brutes/${bruteId}/stats`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        `http://localhost:3000/api/brutes/${bruteId}/stats`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       if (response.data.success) {
         setStats(response.data.stats);
@@ -80,7 +95,6 @@ export default function Home() {
       console.error("Error fetching stats : ", err);
     }
   };
-
 
   return (
     <div className="home-bg">
