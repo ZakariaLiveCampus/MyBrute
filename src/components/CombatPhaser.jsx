@@ -303,18 +303,52 @@ export default function CombatPhaser({
   }, []);
 
   useEffect(() => {
-    console.log("[CombatPhaser] bruteAction reçu:", bruteAction);
-    if (sceneRef.current && bruteAction) {
+    // Attendre que la scène ET les sprites soient définis
+    if (
+      sceneRef.current &&
+      sceneRef.current.bruteSprite &&
+      bruteAction &&
+      bruteAction !== "idle"
+    ) {
       handleAnimation(sceneRef.current.bruteSprite, bruteAction, false);
     }
   }, [bruteAction]);
 
   useEffect(() => {
-    console.log("[CombatPhaser] opponentAction reçu:", opponentAction);
-    if (sceneRef.current && opponentAction) {
+    // Attendre que la scène ET les sprites soient définis
+    if (
+      sceneRef.current &&
+      sceneRef.current.opponentSprite &&
+      opponentAction &&
+      opponentAction !== "idle"
+    ) {
       handleAnimation(sceneRef.current.opponentSprite, opponentAction, true);
     }
   }, [opponentAction]);
+
+  // Effet pour traiter les actions en attente quand la scène devient prête
+  useEffect(() => {
+    if (
+      sceneRef.current &&
+      sceneRef.current.bruteSprite &&
+      sceneRef.current.opponentSprite
+    ) {
+      // Traiter bruteAction si ce n'est pas idle
+      if (bruteAction && bruteAction !== "idle") {
+        handleAnimation(sceneRef.current.bruteSprite, bruteAction, false);
+      }
+
+      // Traiter opponentAction si ce n'est pas idle
+      if (opponentAction && opponentAction !== "idle") {
+        handleAnimation(sceneRef.current.opponentSprite, opponentAction, true);
+      }
+    }
+  }, [
+    sceneRef.current?.bruteSprite,
+    sceneRef.current?.opponentSprite,
+    bruteAction,
+    opponentAction,
+  ]);
 
   return <div ref={phaserRef} />;
 }

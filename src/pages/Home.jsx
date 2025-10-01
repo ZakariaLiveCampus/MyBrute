@@ -84,14 +84,16 @@ export default function Home() {
 
   return (
     <div className="home-bg">
-      <Menu />
+      <Navigation />
       <div className="home-content">
         <h1>Bienvenue sur MyBrute {userData.username} ! </h1>
         <p>
           Choisissez une option dans le menu pour commencer votre aventure !
         </p>
       </div>
+
       <div className="home-main-layout">
+        {/* Carte des stats de la brute */}
         <div className="home-stats">
           <h2>Ma Brute</h2>
           {brutes.length > 0 ? (
@@ -108,10 +110,20 @@ export default function Home() {
             <p>Aucune brute créée pour l’instant.</p>
           )}
         </div>
+
+        {/* Bouton principal vers l'arène */}
         <div className="home-arena">
-          <Link to="/arena">
-            <button className="arena-btn">Arène</button>
-          </Link>
+          <Button
+            onClick={handleGoToArena}
+            size="large"
+            variant="primary"
+            className="arena-btn"
+          >
+            🏟️ Arène
+          </Button>
+          <p className="arena-description">
+            Affrontez d'autres brutes et gagnez en expérience !
+          </p>
         </div>
         <div className="home-score">
           <h2>Scores</h2>

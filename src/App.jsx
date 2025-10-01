@@ -5,6 +5,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { GameProvider } from "./contexts/GameContext";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
@@ -16,17 +17,18 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/create-brute" element={<CreateBrute />} />
-        <Route path="/arena" element={<Arena />} />;
-        <Route path="/fight" element={<Fight />} />;
-      </Routes>
-      <ToastContainer 
+    <GameProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/create-brute" element={<CreateBrute />} />
+          <Route path="/arena" element={<Arena />} />
+          <Route path="/fight" element={<Fight />} />
+        </Routes>
+        <ToastContainer 
         position="top-center"
         autoClose={3000}
         hideProgressBar={true}
@@ -34,6 +36,7 @@ function App() {
         theme="colored"
       />
     </Router>
+    </GameProvider>
   );
 }
 

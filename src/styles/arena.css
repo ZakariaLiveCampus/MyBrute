@@ -28,11 +28,17 @@
 }
 .arena-bg {
   min-height: 100vh;
-  width: 100vw;
+  width: 90vw;
+  max-width: 100vw;
+  overflow-x: hidden;
   background: linear-gradient(135deg, #232526 0%, #414345 100%);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  padding: 120px 20px 40px 20px;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .arena-layout {
@@ -40,12 +46,16 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 120px;
-  width: 700px;
+  width: 90%;
+  max-width: 1200px;
   min-height: 300px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
   box-shadow: 0 4px 24px rgba(44, 62, 80, 0.1);
+  padding: 20px;
+  gap: 20px;
+  margin: 0 auto;
+  position: relative;
 }
 
 /* Styles pour la page de combat */
@@ -164,9 +174,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 24px;
-  min-width: 120px;
+  gap: 15px;
+  min-width: 200px;
+  max-width: 250px;
   height: 100%;
+  overflow: visible;
 }
 .opponent-card {
   background: #fff;
@@ -185,6 +197,41 @@
   justify-content: center;
   align-items: center;
   margin-top: 32px;
+  padding: 0 20px;
+}
+
+/* Media queries pour responsivité */
+@media (max-width: 768px) {
+  .arena-bg {
+    padding: 80px 15px 30px 15px;
+  }
+
+  .arena-layout {
+    flex-direction: column;
+    width: 95%;
+    padding: 15px;
+    gap: 20px;
+  }
+
+  .arena-opponents-col {
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+    min-width: auto;
+    max-width: none;
+  }
+
+  .vs-text {
+    font-size: 2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .arena-opponents-col {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 .fight-btn {
   padding: 1em 2.5em;

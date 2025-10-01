@@ -1,0 +1,82 @@
+/* Styles pour le composant HealthBar de combat */
+.health-bar {
+  flex: 1;
+  margin: 0 10px;
+  font-weight: 500;
+}
+
+.health-bar--player {
+  color: #2ecc71;
+}
+
+.health-bar--opponent {
+  color: #e74c3c;
+}
+
+.health-bar__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.health-bar__name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.health-bar__values {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.health-bar__container {
+  position: relative;
+  width: 100%;
+  height: 24px;
+  background: #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.health-bar__fill {
+  height: 100%;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  position: relative;
+}
+
+.health-bar__fill--health {
+  background: linear-gradient(90deg, #2ecc71 60%, #27ae60 100%);
+}
+
+.health-bar__fill--warning {
+  background: linear-gradient(90deg, #f39c12 60%, #e67e22 100%);
+}
+
+.health-bar__fill--danger {
+  background: linear-gradient(90deg, #e74c3c 60%, #c0392b 100%);
+  animation: pulse-danger 1s infinite;
+}
+
+.health-bar__danger-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 40%, rgba(255, 255, 255, 0.3) 50%, transparent 60%);
+  animation: shine 2s infinite;
+}
+
+@keyframes pulse-danger {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}

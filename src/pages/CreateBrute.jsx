@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/auth.css";
 import { Link, useNavigate } from "react-router-dom";
-import Menu from "../components/Menu";
+import Navigation from "../components/layout/Navigation/Navigation";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -32,7 +32,7 @@ export default function CreateBrute() {
 
   return (
     <div className="auth-bg">
-      <Menu />
+      <Navigation />
       <div className="login-container">
         <h2>Créer ma Brute</h2>
         <form onSubmit={handleSubmit}>

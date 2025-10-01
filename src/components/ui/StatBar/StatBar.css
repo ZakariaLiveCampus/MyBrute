@@ -1,0 +1,51 @@
+/* Styles pour le composant StatBar */
+.stat-bar {
+  margin-bottom: 0.75rem;
+}
+
+.stat-bar__label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.stat-bar__text {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.stat-bar__container {
+  width: 100%;
+  height: 22px;
+  background: #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.stat-bar__fill {
+  height: 100%;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+}
+
+/* Couleurs des barres */
+.stat-bar__fill--health {
+  background: linear-gradient(90deg, #2ecc71 60%, #27ae60 100%);
+}
+
+.stat-bar__fill--mana {
+  background: linear-gradient(90deg, #3498db 60%, #2980b9 100%);
+}
+
+.stat-bar__fill--experience {
+  background: linear-gradient(90deg, #f39c12 60%, #e67e22 100%);
+}
+
+.stat-bar__fill--energy {
+  background: linear-gradient(90deg, #9b59b6 60%, #8e44ad 100%);
+}
