@@ -1,4 +1,4 @@
-import { createBrute, getBrutesByUser } from "../services/bruteService.js";
+import { createBrute, getBrutesByUser, getBruteStats  } from "../services/bruteService.js";
 
 export const create = async (req, res) => {
   const { name } = req.body;

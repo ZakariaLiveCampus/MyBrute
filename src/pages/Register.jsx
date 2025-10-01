@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import "../styles/auth.css";
 import axios from 'axios';
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({
     username: '',
@@ -27,6 +29,8 @@ export default function Register() {
       if (response.data.success){
         toast.success(response.data.message || "Registration successful !");
         setFormValues({username: "", password: ""});
+        
+        navigate("/login");
       } else {
         toast.error(response.data.message || "Registration failed ! Please retry.");
       }
@@ -53,7 +57,7 @@ export default function Register() {
             <label>Confirmer le mot de passe</label>
             <input type="password" placeholder="Confirmez le mot de passe" name="password" value={formValues.password} onChange={handleInputChange}/>
           </div>
-          <button type="submit" ><Link to="/login">S'inscrire</Link></button>
+          <button type="submit" >S'inscrire</button>
         </form>
         <p>
           Déjà un compte ? <Link to="/login">Connexion</Link>
