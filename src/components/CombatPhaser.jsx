@@ -229,11 +229,9 @@ export default function CombatPhaser({
         sprite.play(`${ANIMATIONS.RUN}_${prefix}`);
         sprite.scene.tweens.add({
           targets: sprite,
-          x:
-            targetPos -
-            (isOpponent
-              ? SPRITE_CONFIG.attackDistance
-              : -SPRITE_CONFIG.attackDistance),
+          x: isOpponent
+            ? targetPos + SPRITE_CONFIG.attackDistance
+            : targetPos - SPRITE_CONFIG.attackDistance,
           duration: SPRITE_CONFIG.moveSpeed,
           onComplete: () => {
             sprite.play(animationKey);
