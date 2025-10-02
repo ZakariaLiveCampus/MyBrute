@@ -108,8 +108,7 @@ export default function Home() {
       </div>
 
       <div className="home-main-layout">
-        {/* Carte des stats de la brute */}
-        <BruteDisplay brute={brutes[0]} />
+        {brutes.length > 0 && <BruteDisplay brute={brutes[0]} />}
         <div className="home-stats">
           <h2>Ma Brute</h2>
           {brutes.length > 0 ? (
