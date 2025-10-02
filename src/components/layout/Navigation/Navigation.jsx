@@ -12,6 +12,7 @@ export default function Navigation() {
     { path: "/home", label: "Accueil" },
     { path: "/arena", label: "Arène" },
     { path: "/create-brute", label: "Créer ma Brute" },
+    { path: "/logout", label: "Se déconnecter" },
     // Liens temporairement désactivés jusqu'à implémentation
     // { path: '/options', label: 'Options' },
     // { path: '/top-ladder', label: 'Top Ladder' },

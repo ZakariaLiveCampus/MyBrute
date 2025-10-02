@@ -70,3 +70,32 @@ export const getBruteStats = async (bruteId) => {
   }
 };
 
+export const getOpponentsByLevel = async (level, excludeId) => {
+  try {
+    const minLevel = Math.max(1, level - 2); // niveau min >= 1
+    const maxLevel = level + 2;
+
+    const query = `
+      SELECT *
+      FROM brutes
+      WHERE id <> ?
+        AND level BETWEEN ? AND ?
+      ORDER BY RAND()
+      LIMIT 5
+    `;
+    const values = [excludeId, minLevel, maxLevel];
+
+    const [rows] = await pool.query(query, values);
+
+    return {
+      success: true,
+      opponents: rows,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Erreur lors de la récupération des adversaires",
+      error,
+    };
+  }
+};

@@ -1,19 +1,57 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navigation from "../components/layout/Navigation/Navigation";
 import BruteCard from "../components/game/BruteCard/BruteCard";
 import { Button } from "../components/ui";
-import { useGame } from "../contexts/GameContext";
 import "../styles/arena.css";
+import axios from "axios";
 
 export default function Arena() {
-  const { brute, generateOpponents } = useGame();
   const navigate = useNavigate();
-
-  // Mémoriser les adversaires pour qu'ils ne changent pas à chaque rendu
-  const opponents = useMemo(() => generateOpponents(3), [generateOpponents]);
-
+  const [myBrute, setMyBrute] = useState(null);
+  const [opponents, setOpponents] = useState([]);
   const [selectedOpponent, setSelectedOpponent] = useState(null);
+
+  useEffect(() => {
+    fetchMyBrute();
+  }, []);
+
+  const fetchMyBrute = async () => {
+    try {
+      const token = sessionStorage.getItem("authToken");
+      const response = await axios.get("http://localhost:3000/api/brutes/my-brutes", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (response.data.success && response.data.brutes.length > 0) {
+        const brute = response.data.brutes[0];
+        setMyBrute(brute);
+        fetchOpponents(brute.level, brute.id);
+      }
+    } catch (err) {
+      console.error("Erreur récupération brute :", err);
+    }
+  };
+
+  const fetchOpponents = async (level, myBruteId) => {
+    try {
+      const token = sessionStorage.getItem("authToken");
+      const response = await axios.get(
+        `http://localhost:3000/api/brutes/opponents?level=${level}&excludeId=${myBruteId}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (response.data.success) {
+        setOpponents(response.data.opponents);
+      }
+    } catch (err) {
+      console.error("Erreur récupération adversaires :", err);
+    }
+  };
+
+  const handleSelectOpponent = (opponent) => {
+    setSelectedOpponent(opponent);
+  };
 
   const handleFight = () => {
     if (!selectedOpponent) {
@@ -22,14 +60,10 @@ export default function Arena() {
     }
     navigate("/fight", {
       state: {
-        brute,
+        brute: myBrute,
         opponent: selectedOpponent,
       },
     });
-  };
-
-  const handleSelectOpponent = (opponent) => {
-    setSelectedOpponent(opponent);
   };
 
   return (
@@ -37,7 +71,11 @@ export default function Arena() {
       <Navigation />
       <div className="arena-layout">
         <div className="arena-brute">
-          <BruteCard brute={brute} />
+          {myBrute ? (
+            <BruteCard brute={myBrute} />
+          ) : (
+            <p>Chargement de votre brute...</p>
+          )}
         </div>
 
         <div className="arena-vs-center">
@@ -45,16 +83,20 @@ export default function Arena() {
         </div>
 
         <div className="arena-opponents-col">
-          {opponents.map((opponent) => (
-            <BruteCard
-              key={opponent.id}
-              brute={opponent}
-              compact={true}
-              selectable={true}
-              selected={selectedOpponent?.id === opponent.id}
-              onSelect={handleSelectOpponent}
-            />
-          ))}
+          {opponents.length > 0 ? (
+            opponents.map((opponent) => (
+              <BruteCard
+                key={opponent.id}
+                brute={opponent}
+                compact={true}
+                selectable={true}
+                selected={selectedOpponent?.id === opponent.id}
+                onSelect={handleSelectOpponent}
+              />
+            ))
+          ) : (
+            <p>Aucun adversaire trouvé à ton niveau.</p>
+          )}
         </div>
       </div>
 

@@ -1,4 +1,4 @@
-import { createBrute, getBrutesByUser, getBruteStats  } from "../services/bruteService.js";
+import { createBrute, getBrutesByUser, getBruteStats, getOpponentsByLevel } from "../services/bruteService.js";
 
 export const create = async (req, res) => {
   const { name } = req.body;
@@ -40,6 +40,25 @@ export const getStats = async (req, res) => {
 
   try {
     const response = await getBruteStats(bruteId);
+    if (response.success) {
+      return res.status(200).json(response);
+    } else {
+      return res.status(400).json(response);
+    }
+  } catch (error) {
+    return res.status(500).json({ success: false, message: "Erreur serveur" });
+  }
+};
+
+export const getOpponents = async (req, res) => {
+  const { level, excludeId } = req.query;
+
+  if (!level || !excludeId) {
+    return res.status(400).json({ success: false, message: "Paramètres manquants" });
+  }
+
+  try {
+    const response = await getOpponentsByLevel(Number(level), Number(excludeId));
     if (response.success) {
       return res.status(200).json(response);
     } else {

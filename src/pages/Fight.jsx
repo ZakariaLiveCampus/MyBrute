@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import CombatPhaser from "../components/CombatPhaser";
 import Navigation from "../components/layout/Navigation/Navigation";
@@ -6,22 +6,41 @@ import HealthBar from "../components/game/HealthBar/HealthBar";
 import { Button } from "../components/ui";
 import { useGame } from "../contexts/GameContext";
 import useCombat from "../hooks/useCombat";
+import axios from "axios";
 import "../styles/fight.css";
 
 export default function Fight() {
   const navigate = useNavigate();
   const location = useLocation();
   const { addVictory, addDefeat } = useGame();
+  const hasRecorded = useRef(false);
 
   // Récupérer les données depuis location.state ou utiliser le context
   const { brute, opponent } = location.state || {};
 
   // Callback quand le combat se termine
-  const handleCombatEnd = (winner) => {
-    if (winner === "brute") {
-      addVictory();
-    } else {
-      addDefeat();
+  const handleCombatEnd = async (winner) => {
+    if (hasRecorded.current) return;
+    hasRecorded.current = true;
+
+    const attackerId = brute.id;
+    const defenderId = opponent.id;
+    const winnerId = winner === "brute" ? brute.id : opponent.id;
+
+    try {
+      const token = sessionStorage.getItem("authToken");
+      await axios.post(
+        "http://localhost:3000/api/battles/record",
+        { attackerId, defenderId, winnerId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (winner === "brute") {
+        addVictory();
+      } else {
+        addDefeat();
+      }
+    } catch (err) {
+      console.error("Erreur lors de l'enregistrement du combat : ", err);
     }
   };
 
