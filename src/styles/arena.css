@@ -66,38 +66,12 @@
 
 
 
-.arena-vs-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 80px;
-  gap: 20px;
-}
-
 .vs-text {
   font-size: 5rem;
   font-weight: 900;
   color: var(--accent-red);
   text-shadow: 3px 3px 0 var(--primary-dark), 6px 6px 20px var(--shadow-heavy);
-  animation: vsFloat 2s ease-in-out infinite;
   letter-spacing: 3px;
-}
-
-@keyframes vsFloat {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-10px) scale(1.05); }
-}
-
-.arena-vs-center::before {
-  content: '⚔️';
-  font-size: 3rem;
-  animation: rotate 4s linear infinite;
-}
-
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 .arena-opponents-col {
@@ -217,9 +191,6 @@
     gap: 40px;
   }
   
-  .arena-vs-center {
-    padding-top: 20px;
-  }
   
   .vs-text {
     font-size: 4rem;

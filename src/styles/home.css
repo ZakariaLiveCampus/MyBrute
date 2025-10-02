@@ -110,17 +110,6 @@
   gap: 30px;
 }
 
-.home-arena::before {
-  content: '⚔️';
-  font-size: 4rem;
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-
 .arena-btn {
   background: linear-gradient(135deg, var(--accent-red) 0%, #a73939 100%);
   color: white;

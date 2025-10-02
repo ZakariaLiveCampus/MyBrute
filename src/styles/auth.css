@@ -21,25 +21,6 @@
   position: relative;
 }
 
-.login-container::before,
-.register-container::before {
-  content: '🗡️';
-  position: absolute;
-  top: -40px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 4rem;
-  background: white;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 15px var(--shadow);
-  border: 4px solid var(--accent-gold);
-}
-
 .login-container h2,
 .register-container h2 {
   color: var(--primary-dark);
@@ -79,6 +60,7 @@
   font-size: 1rem;
   background: var(--bg-primary);
   transition: all var(--transition-normal);
+  color: black;
 }
 
 .login-container input:focus,
@@ -130,10 +112,19 @@
   transition: all var(--transition-fast);
 }
 
+.login-container button a,
+.register-container button a {
+  color: white;
+}
+
 .login-container a:hover,
 .register-container a:hover {
-  color: var(--secondary-dark);
   text-decoration: underline;
+}
+
+.login-container button a:hover,
+.register-container button a:hover {
+  text-decoration: none;
 }
 
 /* Responsive */

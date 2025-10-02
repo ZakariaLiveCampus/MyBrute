@@ -1,33 +1,41 @@
 /* theme.css - Variables et styles globaux */
 
 :root {
-  /* Couleurs principales */
-  --primary-dark: #3d2817;
-  --primary-medium: #5c3d2e;
-  --primary-light: #8b6f47;
+  /* Couleurs de la palette */
+  --orange: #D1552D;
+  --orange-clair: #F09347;
+  --gris: #64646A;
+  --gris-fonce: #483F44;
+  --jaune: #FFC43B;
+  --jaune-fonce: #D7943D;
   
-  /* Couleurs secondaires - verts */
-  --secondary-dark: #2d4a2b;
-  --secondary-medium: #4a7c59;
-  --secondary-light: #6b9b7a;
+  /* Couleurs principales */
+  --primary-dark: #D1552D;
+  --primary-medium: #F09347;
+  --primary-light: #FFC43B;
+  
+  /* Couleurs secondaires */
+  --secondary-dark: #483F44;
+  --secondary-medium: #64646A;
+  --secondary-light: #8b8b90;
   
   /* Couleurs d'accent */
-  --accent-gold: #d4af37;
-  --accent-bronze: #cd7f32;
-  --accent-red: #8b2e2e;
+  --accent-gold: #FFC43B;
+  --accent-bronze: #D7943D;
+  --accent-red: #D1552D;
   
   /* Neutres */
-  --bg-primary: #f5f1e8;
-  --bg-secondary: #e8dcc4;
-  --bg-dark: #2a1f14;
-  --text-primary: #2a1f14;
-  --text-secondary: #5c4a3a;
-  --text-light: #f5f1e8;
+  --bg-primary: #f5f5f6;
+  --bg-secondary: #e8e8ea;
+  --bg-dark: #483F44;
+  --text-primary: #483F44;
+  --text-secondary: #64646A;
+  --text-light: #f5f5f6;
   
   /* UI Elements */
-  --border-color: #3d2817;
-  --shadow: rgba(61, 40, 23, 0.3);
-  --shadow-heavy: rgba(61, 40, 23, 0.5);
+  --border-color: #64646A;
+  --shadow: rgba(72, 63, 68, 0.3);
+  --shadow-heavy: rgba(72, 63, 68, 0.5);
   
   /* Animations */
   --transition-fast: 0.2s ease;
@@ -93,10 +101,10 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-medium);
+  background: var(--secondary-medium);
   border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-dark);
+  background: var(--secondary-dark);
 }
