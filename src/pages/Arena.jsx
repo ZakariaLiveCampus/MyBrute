@@ -19,9 +19,12 @@ export default function Arena() {
   const fetchMyBrute = async () => {
     try {
       const token = sessionStorage.getItem("authToken");
-      const response = await axios.get("http://localhost:3000/api/brutes/my-brutes", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        "http://localhost:3000/api/brutes/my-brutes",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       if (response.data.success && response.data.brutes.length > 0) {
         const brute = response.data.brutes[0];
@@ -91,6 +94,7 @@ export default function Arena() {
                 compact={true}
                 selectable={true}
                 selected={selectedOpponent?.id === opponent.id}
+                isOpponent={true}
                 onSelect={handleSelectOpponent}
               />
             ))

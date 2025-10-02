@@ -9,6 +9,7 @@ import "./BruteCard.css";
  * @param {boolean} props.compact - Version compacte
  * @param {boolean} props.selectable - Peut être sélectionné
  * @param {boolean} props.selected - Est sélectionné
+ * @param {boolean} props.isOpponent - Si c'est un opposant (pour l'avatar)
  * @param {function} props.onSelect - Fonction de sélection
  */
 export default function BruteCard({
@@ -16,6 +17,7 @@ export default function BruteCard({
   compact = false,
   selectable = false,
   selected = false,
+  isOpponent = false,
   onSelect,
   ...props
 }) {
@@ -24,6 +26,11 @@ export default function BruteCard({
       onSelect(brute);
     }
   };
+
+  // Choisir l'avatar selon si c'est un opposant ou pas
+  const avatarSrc = isOpponent
+    ? "/assets/Cyborg_portrait.png"
+    : "/assets/Biker_portrait.png";
 
   return (
     <Card
@@ -35,8 +42,20 @@ export default function BruteCard({
       {...props}
     >
       <div className="brute-card__header">
-        <h3 className="brute-card__name">{brute.name}</h3>
-        <span className="brute-card__level">Niveau {brute.level}</span>
+        <div className="brute-card__avatar">
+          <img
+            src={avatarSrc}
+            alt={brute.name}
+            className="brute-card__avatar-img"
+            onError={(e) => {
+              e.target.style.display = "none";
+            }}
+          />
+        </div>
+        <div className="brute-card__info">
+          <h3 className="brute-card__name">{brute.name}</h3>
+          <span className="brute-card__level">Niveau {brute.level}</span>
+        </div>
       </div>
 
       <div className="brute-card__stats">
