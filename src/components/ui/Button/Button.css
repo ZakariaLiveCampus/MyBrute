@@ -1,0 +1,75 @@
+/* Styles pour le composant Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Variantes */
+.btn--primary {
+  background: linear-gradient(90deg, #646cff 0%, #535bf2 100%);
+  color: white;
+}
+
+.btn--primary:hover {
+  background: linear-gradient(90deg, #535bf2 0%, #464cbf 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn--secondary {
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.btn--secondary:hover {
+  background: white;
+  border-color: #646cff;
+}
+
+.btn--danger {
+  background: linear-gradient(90deg, #e74c3c 60%, #c0392b 100%);
+  color: white;
+}
+
+.btn--danger:hover {
+  background: #b71c1c;
+  transform: translateY(-1px);
+}
+
+/* Tailles */
+.btn--small {
+  padding: 0.5em 1em;
+  font-size: 0.875rem;
+}
+
+.btn--medium {
+  padding: 0.75em 1.5em;
+  font-size: 1rem;
+}
+
+.btn--large {
+  padding: 1em 2em;
+  font-size: 1.125rem;
+}
+
+/* État désactivé */
+.btn--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn--disabled:hover {
+  transform: none !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
