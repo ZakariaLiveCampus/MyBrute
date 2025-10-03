@@ -5,6 +5,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+
 import { GameProvider } from "./contexts/GameContext";
 import Login from "./pages/Login";
 import Register from "./pages/Register";

@@ -1,198 +1,317 @@
-/* arena.css */
+/* arena.css - Layout avec stats à gauche et grid d'adversaires à droite */
 
 .arena-bg {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
 }
 
-.arena-layout {
-  max-width: 100%;
-  padding: 40px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 60px;
-  align-items: start;
+/* Layout principal */
+.arena-main-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px 40px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  gap: 30px;
 }
 
-.arena-brute {
+/* Container des deux colonnes */
+.arena-content-row {
+  display: flex;
+  gap: 40px;
+}
+
+/* Card stats de ma brute - gauche */
+.arena-my-brute-card {
+  flex: 0 0 450px;
   background: white;
   border-radius: 16px;
   padding: 30px;
   box-shadow: 0 8px 24px var(--shadow);
-  border-top: 5px solid var(--secondary-medium);
-  position: relative;
+  border-top: 5px solid var(--accent-bronze);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  height: 100%;
+}
+
+.my-brute-title {
+  color: var(--primary-dark);
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0;
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 3px solid var(--accent-bronze);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Section header avec image et HP */
+.arena-brute-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Section image de la brute */
+.arena-brute-display {
+  justify-content: center;
+  /* align-items: center; */
+  height: 150px;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  border-radius: 12px;
+  /* padding: 20px; */
+  border: 3px solid var(--accent-bronze);
   overflow: hidden;
 }
 
-.arena-brute::before {
-  content: '🛡️';
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  font-size: 8rem;
-  opacity: 0.1;
-  transform: rotate(-15deg);
-}
-
-.brute-info h2 {
-  color: var(--primary-dark);
-  font-size: 2.2rem;
-  margin-bottom: 25px;
+/* Bloc HP à droite de l'image */
+.arena-brute-hp-block {
+  flex: 1;
+  background: linear-gradient(135deg, var(--primary-medium) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
   text-align: center;
-  padding-bottom: 15px;
-  border-bottom: 3px solid var(--accent-gold);
-  position: relative;
-  z-index: 1;
+  box-shadow: 0 4px 12px var(--shadow);
+  display: flex;
+  justify-content: space-evenly;
+  /* gap: 10px; */
+  height: 150px;
+  line-height: 18px;
+  flex-direction: column;
 }
 
-.brute-stats {
-  list-style: none;
-  position: relative;
-  z-index: 1;
+.hp-label {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.9;
 }
 
-.brute-stats li {
-  background: linear-gradient(90deg, var(--secondary-light), var(--secondary-medium));
+.hp-value {
+  font-size: 3.5rem;
+  font-weight: 900;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1;
+}
+
+.hp-icon {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+/* Stats de la brute - en 2 colonnes */
+.arena-brute-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.arena-stat-item {
+  background: linear-gradient(135deg, var(--secondary-light) 0%, var(--secondary-medium) 100%);
   color: white;
   padding: 14px 20px;
-  margin: 12px 0;
   border-radius: 8px;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  box-shadow: 0 3px 10px var(--shadow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px var(--shadow);
   transition: all var(--transition-normal);
+  height: fit-content;
 }
 
-
-
-.vs-text {
-  font-size: 5rem;
-  font-weight: 900;
-  color: var(--accent-red);
-  text-shadow: 3px 3px 0 var(--primary-dark), 6px 6px 20px var(--shadow-heavy);
-  letter-spacing: 3px;
+.arena-stat-item:hover {
+  transform: translateX(3px);
+  box-shadow: 0 4px 12px var(--shadow);
 }
 
-.arena-opponents-col {
+.arena-stat-label {
+  font-weight: 700;
+  opacity: 0.95;
+}
+
+.arena-stat-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--jaune);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Section adversaires - droite */
+.arena-opponents-section {
+  flex: 1;
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 8px 24px var(--shadow);
+  border-top: 5px solid var(--accent-red);
   display: flex;
   flex-direction: column;
   gap: 20px;
+  height: fit-content;
 }
 
-.opponent-card {
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 15px var(--shadow);
-  border: 3px solid transparent;
-  transition: all var(--transition-normal);
-  cursor: pointer;
-  position: relative;
-}
-
-.opponent-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, var(--accent-bronze), var(--accent-gold));
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-  border-radius: 12px;
-  z-index: 0;
-}
-
-.opponent-card > * {
-  position: relative;
-  z-index: 1;
-}
-
-.opponent-card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 8px 25px var(--shadow-heavy);
-  border-color: var(--primary-light);
-}
-
-.opponent-card.selected {
-  border-color: var(--accent-gold);
-  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.3), 0 8px 25px var(--shadow-heavy);
-  background: linear-gradient(135deg, #fff9e6, #ffffff);
-}
-
-.opponent-card.selected::before {
-  opacity: 0.1;
-}
-
-.opponent-card strong {
-  color: var(--accent-red);
-  font-size: 1.5rem;
-  display: block;
-  margin-bottom: 12px;
-  font-weight: 700;
-}
-
-.arena-fight-btn-row {
+.opponents-title {
+  color: var(--primary-dark);
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0;
   text-align: center;
-  margin-top: 50px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid var(--accent-red);
 }
 
-.fight-btn {
+.opponents-subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  text-align: center;
+  margin: -10px 0 0 0;
+  font-weight: 600;
+}
+
+/* Grille des adversaires - 2x2 */
+.opponents-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  align-content: start;
+}
+
+/* Message si pas d'adversaires */
+.no-opponents-message {
+  grid-column: 1 / -1;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+}
+
+/* Container du bouton de combat */
+.arena-fight-section {
+  text-align: center;
+  padding: 0;
+}
+
+.arena-fight-btn {
   background: linear-gradient(135deg, var(--accent-red) 0%, #a73939 100%);
   color: white;
-  font-size: 2rem;
-  font-weight: 700;
-  padding: 20px 80px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  padding: 18px 50px;
   border-radius: 12px;
-  box-shadow: 0 8px 20px var(--shadow-heavy);
+  box-shadow: 0 6px 16px var(--shadow-heavy);
   text-transform: uppercase;
   letter-spacing: 2px;
-  border: 3px solid var(--primary-dark);
   position: relative;
   overflow: hidden;
+  border: 3px solid var(--primary-dark);
+  cursor: pointer;
+  transition: all var(--transition-normal);
 }
 
-.fight-btn::before {
+.arena-fight-btn::before {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   transition: left 0.5s;
 }
 
-.fight-btn:hover:not(:disabled) {
+.arena-fight-btn:hover:not(:disabled) {
   transform: scale(1.05);
-  box-shadow: 0 12px 30px var(--shadow-heavy);
+  box-shadow: 0 8px 20px var(--shadow-heavy);
 }
 
-.fight-btn:hover:not(:disabled)::before {
+.arena-fight-btn:hover:not(:disabled)::before {
   left: 100%;
 }
 
-.fight-btn:active:not(:disabled) {
-  transform: scale(0.98);
+.arena-fight-btn:active:not(:disabled) {
+  transform: scale(1.02);
 }
 
-.fight-btn:disabled {
+.arena-fight-btn:disabled {
   background: linear-gradient(135deg, #999, #777);
   cursor: not-allowed;
   border-color: #666;
+  opacity: 0.5;
 }
 
 /* Responsive */
 @media (max-width: 1200px) {
-  .arena-layout {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .arena-content-row {
+    flex-direction: column;
+    max-height: none;
+    overflow-y: auto;
   }
-  
-  
-  .vs-text {
-    font-size: 4rem;
+
+  .arena-bg {
+    overflow-y: auto;
+  }
+
+  .arena-my-brute-card {
+    flex: none;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .arena-opponents-section {
+    flex: none;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .opponents-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .arena-main-section {
+    padding: 20px 15px;
+  }
+
+  .arena-content-row {
+    gap: 25px;
+  }
+
+  .arena-my-brute-card,
+  .arena-opponents-section {
+    padding: 20px;
+  }
+
+  .my-brute-title,
+  .opponents-title {
+    font-size: 1.5rem;
+  }
+
+  .arena-fight-btn {
+    font-size: 1.6rem;
+    padding: 20px 50px;
+  }
+
+  .arena-brute-display {
+    min-height: 150px;
   }
 }

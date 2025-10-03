@@ -4,7 +4,6 @@ import "./BruteDisplay.css";
 export default function BruteDisplay({ brute, className = "" }) {
   return (
     <div className={`brute-display ${className}`}>
-      <div className="brute-image-container">
         <img
           src="/assets/Biker_avatar.png"
           alt={brute?.name || "Ma Brute"}
@@ -13,8 +12,7 @@ export default function BruteDisplay({ brute, className = "" }) {
             e.target.style.display = "none";
           }}
         />
-      </div>
-      <div className="brute-name">{brute?.name || "Ma Brute"}</div>
+      
     </div>
   );
 }
