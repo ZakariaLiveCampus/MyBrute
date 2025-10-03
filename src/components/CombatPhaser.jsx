@@ -193,6 +193,11 @@ export default function CombatPhaser({
   const gameRef = useRef(null);
   const sceneRef = useRef(null);
 
+  const [bruteLock, setBruteLock] = React.useState(false);
+  const [opponentLock, setOpponentLock] = React.useState(false);
+  const [lastBruteAction, setLastBruteAction] = React.useState(null);
+  const [lastOpponentAction, setLastOpponentAction] = React.useState(null);
+
   const handleAnimation = (sprite, action, isOpponent = false) => {
     if (!sprite || !sprite.anims) {
       console.warn("Sprite ou système d'animation non initialisé", { sprite });
@@ -246,6 +251,11 @@ export default function CombatPhaser({
                 onComplete: () => {
                   sprite.play(`${ANIMATIONS.IDLE}_${prefix}`);
                   if (onAnimationDone) onAnimationDone();
+                  if (isOpponent) {
+                    setOpponentLock(false);
+                  } else {
+                    setBruteLock(false);
+                  }
                 },
               });
             });
@@ -263,6 +273,11 @@ export default function CombatPhaser({
           onComplete: () => {
             sprite.play(`${ANIMATIONS.IDLE}_${prefix}`);
             if (onAnimationDone) onAnimationDone();
+            if (isOpponent) {
+              setOpponentLock(false);
+            } else {
+              setBruteLock(false);
+            }
           },
         });
         break;
@@ -279,10 +294,22 @@ export default function CombatPhaser({
             repeat: -1,
           });
         }
+        // Unlock immediately for these animations
+        if (isOpponent) {
+          setOpponentLock(false);
+        } else {
+          setBruteLock(false);
+        }
         break;
 
       default:
         sprite.play(animationKey);
+        // Unlock for simple animations
+        if (isOpponent) {
+          setOpponentLock(false);
+        } else {
+          setBruteLock(false);
+        }
         break;
     }
   };
@@ -415,51 +442,69 @@ export default function CombatPhaser({
   }, []);
 
   useEffect(() => {
-    // Attendre que la scène ET les sprites soient définis
     if (
       sceneRef.current &&
       sceneRef.current.bruteSprite &&
       bruteAction &&
-      bruteAction !== "idle"
+      bruteAction !== "idle" &&
+      !bruteLock &&
+      bruteAction !== lastBruteAction
     ) {
+      setBruteLock(true);
+      setLastBruteAction(bruteAction);
       handleAnimation(sceneRef.current.bruteSprite, bruteAction, false);
     }
-  }, [bruteAction]);
+  }, [bruteAction, bruteLock, lastBruteAction]);
 
   useEffect(() => {
-    // Attendre que la scène ET les sprites soient définis
     if (
       sceneRef.current &&
       sceneRef.current.opponentSprite &&
       opponentAction &&
-      opponentAction !== "idle"
+      opponentAction !== "idle" &&
+      !opponentLock &&
+      opponentAction !== lastOpponentAction
     ) {
+      setOpponentLock(true);
+      setLastOpponentAction(opponentAction);
       handleAnimation(sceneRef.current.opponentSprite, opponentAction, true);
     }
-  }, [opponentAction]);
+  }, [opponentAction, opponentLock, lastOpponentAction]);
 
-  // Effet pour traiter les actions en attente quand la scène devient prête
   useEffect(() => {
     if (
       sceneRef.current &&
       sceneRef.current.bruteSprite &&
-      sceneRef.current.opponentSprite
+      bruteAction &&
+      bruteAction !== "idle" &&
+      !bruteLock &&
+      bruteAction !== lastBruteAction
     ) {
-      // Traiter bruteAction si ce n'est pas idle
-      if (bruteAction && bruteAction !== "idle") {
-        handleAnimation(sceneRef.current.bruteSprite, bruteAction, false);
-      }
-
-      // Traiter opponentAction si ce n'est pas idle
-      if (opponentAction && opponentAction !== "idle") {
-        handleAnimation(sceneRef.current.opponentSprite, opponentAction, true);
-      }
+      setBruteLock(true);
+      setLastBruteAction(bruteAction);
+      handleAnimation(sceneRef.current.bruteSprite, bruteAction, false);
+    }
+    if (
+      sceneRef.current &&
+      sceneRef.current.opponentSprite &&
+      opponentAction &&
+      opponentAction !== "idle" &&
+      !opponentLock &&
+      opponentAction !== lastOpponentAction
+    ) {
+      setOpponentLock(true);
+      setLastOpponentAction(opponentAction);
+      handleAnimation(sceneRef.current.opponentSprite, opponentAction, true);
     }
   }, [
     sceneRef.current?.bruteSprite,
     sceneRef.current?.opponentSprite,
     bruteAction,
     opponentAction,
+    bruteLock,
+    opponentLock,
+    lastBruteAction,
+    lastOpponentAction,
   ]);
 
   return <div ref={phaserRef} />;
