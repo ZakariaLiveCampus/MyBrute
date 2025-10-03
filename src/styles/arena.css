@@ -83,7 +83,6 @@
   box-shadow: 0 4px 12px var(--shadow);
   display: flex;
   justify-content: space-evenly;
-  /* gap: 10px; */
   height: 150px;
   line-height: 18px;
   flex-direction: column;
