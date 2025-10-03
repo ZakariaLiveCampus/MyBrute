@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import "../styles/theme.css";
 import "../styles/home.css";
 import Navigation from "../components/layout/Navigation/Navigation";
-import { Link } from "react-router-dom";
 import { Button } from "../components/ui";
 import { useGame } from "../contexts/GameContext";
 import { useNavigate } from "react-router-dom";
@@ -100,50 +100,97 @@ export default function Home() {
   return (
     <div className="home-bg">
       <Navigation />
+
+      {/* Header de bienvenue */}
       <div className="home-content">
-        <h1>Bienvenue sur MyBrute {userData.username} ! </h1>
-        <p>
-          Choisissez une option dans le menu pour commencer votre aventure !
-        </p>
+        <h1>Bienvenue sur MyBrute {userData.username} !</h1>
+        <p>Prêt à affronter les meilleurs combattants ?</p>
       </div>
 
+      {/* Layout principal */}
       <div className="home-main-layout">
-        {brutes.length > 0 && <BruteDisplay brute={brutes[0]} />}
-        <div className="home-stats">
-          <h2>Ma Brute</h2>
+        <div className="home-brute-section">
+          {/* Card de la brute */}
           {brutes.length > 0 ? (
-            <ul>
-              <li>Nom : {brutes[0].name}</li>
-              <li>Force : {brutes[0].strength}</li>
-              <li>Agilité : {brutes[0].agility}</li>
-              <li>Vitesse : {brutes[0].speed}</li>
-              <li>Niveau : {brutes[0].level}</li>
-              <li>XP : {brutes[0].xp}</li>
-              <li>HP : {brutes[0].hp}</li>
-            </ul>
-          ) : (
-            <p>Aucune brute créée pour l’instant.</p>
-          )}
-        </div>
+            <div className="home-brute-card">
+              {/* En-tête avec image et infos principales */}
+              <div className="brute-header">
+                <div className="brute-image-container">
+                  <BruteDisplay brute={brutes[0]} />
+                </div>
 
-        {/* Bouton principal vers l'arène */}
-        <div className="home-arena">
-          <Button
-            onClick={handleGoToArena}
-            size="large"
-            variant="primary"
-            className="arena-btn"
-          >
-            🏟️ Arène
-          </Button>
-          <p className="arena-description">
-            Affrontez d'autres brutes et gagnez en expérience !
-          </p>
-        </div>
-        <div className="home-score">
-          <h2>Scores</h2>
-          <p>Victoires : {stats.victories}</p>
-          <p>Défaites : {stats.defeats}</p>
+                <div className="brute-main-info">
+                  <h2 className="brute-name">{brutes[0].name} - Niveau {brutes[0].level}</h2>
+
+                  {/* Score victoires/défaites */}
+                  <div className="brute-score">
+                    <div className="score-item">
+                      <div className="score-label">Victoires</div>
+                      <div className="score-value">{stats.victories}</div>
+                    </div>
+                    <div className="score-item">
+                      <div className="score-label">Défaites</div>
+                      <div className="score-value">{stats.defeats}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Stats de la brute */}
+              <div className="brute-stats-section">
+                <h3 className="stats-title">Statistiques</h3>
+                <div className="brute-stats-grid">
+                  <div className="stat-item">
+                    <span className="stat-label">Force</span>
+                    <span className="stat-value">{brutes[0].strength}</span>
+                  </div>
+                  <div className="stat-item">
+                    <span className="stat-label">Agilité</span>
+                    <span className="stat-value">{brutes[0].agility}</span>
+                  </div>
+                  <div className="stat-item">
+                    <span className="stat-label">Vitesse</span>
+                    <span className="stat-value">{brutes[0].speed}</span>
+                  </div>
+                  <div className="stat-item">
+                    <span className="stat-label">Niveau</span>
+                    <span className="stat-value">{brutes[0].level}</span>
+                  </div>
+                  <div className="stat-item">
+                    <span className="stat-label">XP</span>
+                    <span className="stat-value">{brutes[0].xp}</span>
+                  </div>
+                  <div className="stat-item">
+                    <span className="stat-label">HP</span>
+                    <span className="stat-value">{brutes[0].hp}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="home-brute-card">
+              <p className="no-brute-message">
+                Aucune brute créée pour l'instant.
+              </p>
+            </div>
+          )}
+
+          {/* Section arène */}
+          <div className="home-arena-section">
+            <h2 className="arena-title">L'Arène</h2>
+            <Button
+              onClick={handleGoToArena}
+              size="large"
+              variant="primary"
+              className="arena-btn"
+            >
+              🏟️ Combattre
+            </Button>
+            <p className="arena-description">
+              Affrontez d'autres brutes et gagnez en expérience pour devenir le
+              champion ultime !
+            </p>
+          </div>
         </div>
       </div>
     </div>

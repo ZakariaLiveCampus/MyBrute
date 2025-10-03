@@ -1,0 +1,110 @@
+/* theme.css - Variables et styles globaux */
+
+:root {
+  /* Couleurs de la palette */
+  --orange: #D1552D;
+  --orange-clair: #F09347;
+  --gris: #64646A;
+  --gris-fonce: #483F44;
+  --jaune: #FFC43B;
+  --jaune-fonce: #D7943D;
+  
+  /* Couleurs principales */
+  --primary-dark: #D1552D;
+  --primary-medium: #F09347;
+  --primary-light: #FFC43B;
+  
+  /* Couleurs secondaires */
+  --secondary-dark: #483F44;
+  --secondary-medium: #64646A;
+  --secondary-light: #8b8b90;
+  
+  /* Couleurs d'accent */
+  --accent-gold: #FFC43B;
+  --accent-bronze: #D7943D;
+  --accent-red: #D1552D;
+  
+  /* Neutres */
+  --bg-primary: #f5f5f6;
+  --bg-secondary: #e8e8ea;
+  --bg-dark: #483F44;
+  --text-primary: #483F44;
+  --text-secondary: #64646A;
+  --text-light: #f5f5f6;
+  
+  /* UI Elements */
+  --border-color: #64646A;
+  --shadow: rgba(72, 63, 68, 0.3);
+  --shadow-heavy: rgba(72, 63, 68, 0.5);
+  
+  /* Animations */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  overflow-x: hidden;
+}
+
+/* Typographie */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+/* Boutons génériques */
+button, .btn {
+  font-family: inherit;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  outline: none;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Inputs génériques */
+input, textarea, select {
+  font-family: inherit;
+  outline: none;
+  transition: all var(--transition-normal);
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition-fast);
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-medium);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-dark);
+}

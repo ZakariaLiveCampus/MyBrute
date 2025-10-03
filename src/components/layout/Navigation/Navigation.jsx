@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import "./Navigation.css";
+import "../../../styles/theme.css";
+import "../../../styles/menu.css";
+
 
 /**
  * Composant Navigation principal avec gestion des liens actifs
@@ -23,7 +25,7 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="navigation">
+    <nav className="navigation home-menu">
       <ul className="navigation__list">
         {navigationItems.map((item) => (
           <li key={item.path} className="navigation__item">

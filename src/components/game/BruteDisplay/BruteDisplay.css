@@ -1,23 +1,9 @@
-.brute-display {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.1);
-  min-width: 120px;
-  max-width: 150px;
-}
-
 .brute-image-container {
-  width: 80px;
-  height: 80px;
+  width: max-content;
+  height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.5rem;
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   border-radius: 12px;
   border: 2px solid #646cff;
@@ -26,7 +12,7 @@
 
 .brute-image {
   width: 100%;
-  height: 100%;
+  height: 150px;
   object-fit: contain;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
@@ -35,23 +21,24 @@
 }
 
 .brute-name {
-  color: #646cff;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-align: center;
-  margin-top: 0.5rem;
+    color: #646cff;
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
 }
 
-/* Animation subtle pour donner vie à la brute */
+/* Animation subtle pour donner vie à la brute
 @keyframes bruteAvatar {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-2px);
   }
-}
+} */
 
 /* Responsive */
 @media (max-width: 768px) {

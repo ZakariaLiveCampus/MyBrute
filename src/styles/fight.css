@@ -1,73 +1,237 @@
+/* Page Fight - Layout principal */
 .fight-page {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   position: relative;
+  background: var(--bg-primary);
 }
 
+/* Wrapper pour centrer le contenu avec max-width */
+.fight-wrapper {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Bandeaux publicitaires */
+.ad-banner {
+  flex: 1;
+  background: linear-gradient(180deg, var(--gris-fonce) 0%, var(--gris) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-light);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.ad-banner.left {
+  border-right: none;
+}
+
+.ad-banner.right {
+  border-left: none;
+}
+
+/* Container principal centré */
 .fight-container {
   width: 100%;
-  max-width: 700px;
+  max-width: 1400px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background: none;
-  box-shadow: none;
-  border-radius: 0;
+  height: 100%;
+  position: relative;
+  background: var(--bg-dark);
+}
+
+/* Barres de santé */
+.fight-page .health-bars {
+  display: flex;
+  justify-content: space-between;
+  gap: 100px;
+  width: 100%;
+  padding: 20px 40px;
+  background: #FFC43B;
+
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+/* Zone de combat - occupe tout l'espace restant */
+.combat-canvas-wrapper {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+/* Canvas Phaser */
+.fight-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  object-fit: cover;
+}
+
+/* Container du canvas Phaser */
+.fight-container > div:nth-child(2) {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+
+/* Barre de santé individuelle */
+.health-bar {
+  flex: 1;
+  max-width: 450px;
 }
 
 .health-bar .bar {
   width: 100%;
-  height: 22px;
-  background: #e0e0e0;
-  border-radius: 12px;
+  height: 28px;
+  background: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 100%);
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: 2px solid var(--gris-fonce);
 }
 
 .health-bar .bar > div {
   height: 100%;
-  background: linear-gradient(90deg, #2ecc71 60%, #27ae60 100%);
+  background: linear-gradient(90deg, #2ecc71 0%, #27ae60 50%, #1e8449 100%);
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.3);
 }
 
+/* Message de fin de combat */
 .combat-end-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(30, 30, 30, 0.92);
-  padding: 32px 24px;
-  border-radius: 16px;
-  width: 100%;
-  max-width: 700px;
-  margin: 32px auto 0 auto;
+  background: rgba(72, 63, 68, 0.95);
+  padding: 48px 64px;
+  border-radius: 20px;
+  border: 4px solid var(--jaune);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 196, 59, 0.4);
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: none;
-  box-shadow: none;
-  border-radius: 0;
-  color: #ffe066;
-  text-shadow: 0 2px 8px #000a;
+  gap: 24px;
+  z-index: 100;
+  animation: slideIn 0.5s ease-out;
 }
 
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.victory-message {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--jaune);
+  text-shadow: 
+    0 0 10px rgba(255, 196, 59, 0.8),
+    0 4px 12px rgba(0, 0, 0, 0.8),
+    0 2px 4px rgba(209, 85, 45, 0.6);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Bouton de retour */
 .return-button {
-  background: linear-gradient(90deg, #e74c3c 60%, #c0392b 100%);
-  color: #fff;
-  border: none;
-  padding: 12px 28px;
-  border-radius: 8px;
+  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-clair) 100%);
+  color: var(--text-light);
+  border: 3px solid var(--jaune-fonce);
+  padding: 16px 48px;
+  border-radius: 12px;
   cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  transition: background 0.3s ease, box-shadow 0.2s;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 16px rgba(209, 85, 45, 0.4);
+  transition: all var(--transition-normal);
 }
 
 .return-button:hover {
-  background: #b71c1c;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  background: linear-gradient(135deg, #b8421f 0%, var(--orange) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(209, 85, 45, 0.6);
+}
+
+.return-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(209, 85, 45, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .ad-banner {
+    display: none;
+  }
+  
+  .fight-container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .fight-page .health-bars {
+    gap: 20px;
+    padding: 15px 20px;
+  }
+  
+  .combat-end-container {
+    padding: 32px 40px;
+  }
+  
+  .victory-message {
+    font-size: 2rem;
+  }
+  
+  .return-button {
+    padding: 12px 32px;
+    font-size: 1.1rem;
+  }
+}
+
+.health-bar.health-bar--player .health-bar__name {
+  color: white;
+  font-size: 20px;
+}
+
+.health-bar.health-bar--player .health-bar__values{
+  color: white;
+  font-size: 14px;
+}
+
+.health-bar__name {
+  font-size: 20px;
+}
+
+.health-bar__values{
+  font-size: 14px;
 }

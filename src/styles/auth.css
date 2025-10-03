@@ -1,95 +1,147 @@
-body,
-html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  color: black;
-}
+/* auth.css - Login, Register, CreateBrute */
 
 .auth-bg {
   min-height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #232526 0%, #414345 100%);
-}
-/* Styles de base pour les pages de connexion et inscription */
-.login-container,
-.register-container {
-  max-width: 350px;
-  width: 100%;
-  padding: 2em 2em 1.5em 2em;
-  background: #f8f9fa;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15);
+  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding: 0;
 }
+
+.login-container,
+.register-container {
+  max-width: 500px;
+  width: 90%;
+  margin: auto;
+  background: white;
+  border-radius: 16px;
+  padding: 50px 40px;
+  box-shadow: 0 10px 40px var(--shadow-heavy);
+  border-top: 5px solid var(--accent-gold);
+  position: relative;
+}
+
 .login-container h2,
 .register-container h2 {
-  margin-bottom: 1em;
-  color: #646cff;
-  font-size: 2rem;
+  color: var(--primary-dark);
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 35px;
   font-weight: 700;
 }
+
+.login-container form,
+.register-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .login-container form div,
 .register-container form div {
-  margin-bottom: 1em;
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
+
 .login-container label,
 .register-container label {
-  display: block;
-  margin-bottom: 0.5em;
-  font-weight: 500;
-  color: #333;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 600;
+  padding-left: 5px;
 }
+
 .login-container input,
 .register-container input {
-  width: 100%;
-  padding: 0.6em;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  background: #fff;
-  color: #000;
-  font-size: 1em;
-  margin-bottom: 0.2em;
-}
-.login-container button,
-.register-container button {
-  width: 100%;
-  padding: 0.8em;
-  background: linear-gradient(90deg, #646cff 0%, #535bf2 100%);
-  color: #fff;
-  border: none;
+  padding: 14px 18px;
+  border: 2px solid var(--bg-secondary);
   border-radius: 8px;
-  font-size: 1.1em;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
-  transition: background 0.2s;
+  font-size: 1rem;
+  background: var(--bg-primary);
+  transition: all var(--transition-normal);
+  color: black;
 }
-.login-container button:hover,
-.register-container button:hover {
-  background: linear-gradient(90deg, #535bf2 0%, #646cff 100%);
+
+.login-container input:focus,
+.register-container input:focus {
+  border-color: var(--accent-gold);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
 }
+
+.login-container button[type="submit"],
+.register-container button[type="submit"] {
+  margin-top: 15px;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--secondary-medium) 0%, var(--secondary-dark) 100%);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px var(--shadow);
+  transition: all var(--transition-normal);
+  border: none;
+}
+
+.login-container button[type="submit"]:hover,
+.register-container button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--shadow-heavy);
+}
+
+.login-container button[type="submit"]:active,
+.register-container button[type="submit"]:active {
+  transform: translateY(0);
+}
+
 .login-container p,
 .register-container p {
-  margin-top: 1em;
   text-align: center;
-  font-size: 0.95em;
+  margin-top: 25px;
+  color: var(--text-secondary);
+  font-size: 1rem;
 }
+
 .login-container a,
 .register-container a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s;
+  color: var(--secondary-medium);
+  font-weight: 700;
+  transition: all var(--transition-fast);
 }
+
+.login-container button a,
+.register-container button a {
+  color: white;
+}
+
 .login-container a:hover,
 .register-container a:hover {
-  color: #000;
+  text-decoration: underline;
+}
+
+.login-container button a:hover,
+.register-container button a:hover {
   text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .login-container,
+  .register-container {
+    padding: 40px 25px;
+  }
+  
+  .login-container h2,
+  .register-container h2 {
+    font-size: 2rem;
+  }
+}
+
+.auth-bg {
+  background-image: url('../assets/arena_bg.png');
+  background-position: center;
+  background-size: cover;
 }
